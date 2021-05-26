@@ -1,3 +1,4 @@
+# https://cryptopals.com/sets/1/challenges/1
 import binascii
 import base64
 
@@ -9,6 +10,7 @@ def convertHexToBase64(hex_enc_str):
     ascii_bytes = binascii.unhexlify(hex_enc_str.encode())
     # Encode ASCII to base64
     base64_bytes = base64.b64encode(ascii_bytes)
+    # Convert from bytes to string representation
     base64_str = base64_bytes.decode("utf-8")
     return base64_str
 
