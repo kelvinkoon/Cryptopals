@@ -10,17 +10,16 @@ def decodeFixedXOR(hex_enc_str, hex_enc_key):
         raise Exception("Input string and key are not equal lengths")
 
     # Decode inputs from hex
-    input_ascii = binascii.unhexlify(hex_enc_str.encode())
-    key_ascii = binascii.unhexlify(hex_enc_key.encode())
+    input_ascii_bytes = binascii.unhexlify(hex_enc_str.encode())
+    key_ascii_bytes = binascii.unhexlify(hex_enc_key.encode())
 
     # Store individual byte XOR results
-    xor_bytes = []
-    for i in range(0, len(input_ascii)):
-        xor_byte = input_ascii[i] ^ key_ascii[i]
-        xor_bytes.append(xor_byte)
+    xor_bytes = b''
+    for i in range(0, len(input_ascii_bytes)):
+        xor_bytes += bytes([input_ascii_bytes[i] ^ key_ascii_bytes[i]])
 
     # Re-encode to hex
-    xor_hex_enc = binascii.hexlify(bytearray(xor_bytes)).decode("utf-8")
+    xor_hex_enc = binascii.hexlify(xor_bytes).decode("utf-8")
     return xor_hex_enc
 
 def main():
