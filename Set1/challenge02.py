@@ -1,9 +1,9 @@
 # https://cryptopals.com/sets/1/challenges/2
 import binascii
 
-input_str = "1c0111001f010100061a024b53535009181c"
-input_key = "686974207468652062756c6c277320657965"
-expected_str = "746865206b696420646f6e277420706c6179"
+INPUT_STR = "1c0111001f010100061a024b53535009181c"
+INPUT_KEY = "686974207468652062756c6c277320657965"
+EXPECTED_STR = "746865206b696420646f6e277420706c6179"
 
 
 def decodeFixedXOR(hex_enc_str, hex_enc_key):
@@ -32,8 +32,8 @@ def decodeFixedXOR(hex_enc_str, hex_enc_key):
 
 
 def main():
-    output_str = decodeFixedXOR(input_str, input_key)
-    assert output_str == expected_str
+    output_str = decodeFixedXOR(INPUT_STR, INPUT_KEY)
+    assert output_str == EXPECTED_STR
 
 
 if __name__ == "__main__":

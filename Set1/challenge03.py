@@ -1,9 +1,9 @@
 # https://cryptopals.com/sets/1/challenges/3
 import binascii
 
-input_str = "1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736"
-expected_decoded_ascii_bytes = b"Cooking MC's like a pound of bacon"
-expected_key_byte = b"X"
+INPUT_STR = "1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736"
+EXPECTED_DECODED_ASCII_BYTES = b"Cooking MC's like a pound of bacon"
+EXPECTED_KEY_BYTES = b"X"
 
 # Taken from https://crypto.stackexchange.com/a/40930
 # Assigning space a value greatly improves decoding
@@ -97,11 +97,11 @@ def decodeSingleByteXORCipher(hex_enc_str):
 
 
 def main():
-    output_ascii_bytes, _, output_key_byte = decodeSingleByteXORCipher(input_str)
-    assert output_ascii_bytes.decode("utf-8") == expected_decoded_ascii_bytes.decode(
+    output_ascii_bytes, _, output_key_byte = decodeSingleByteXORCipher(INPUT_STR)
+    assert output_ascii_bytes.decode("utf-8") == EXPECTED_DECODED_ASCII_BYTES.decode(
         "utf-8"
     )
-    assert output_key_byte.decode("utf-8") == expected_key_byte.decode("utf-8")
+    assert output_key_byte.decode("utf-8") == EXPECTED_KEY_BYTES.decode("utf-8")
 
 
 if __name__ == "__main__":
