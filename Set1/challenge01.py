@@ -6,7 +6,7 @@ INPUT_STR = "49276d206b696c6c696e6720796f757220627261696e206c696b65206120706f697
 EXPECTED_STR = "SSdtIGtpbGxpbmcgeW91ciBicmFpbiBsaWtlIGEgcG9pc29ub3VzIG11c2hyb29t"
 
 
-def convertHexToBase64(hex_enc_str):
+def convertHexToBase64(hex_enc_str: str):
     """
     Converts a hex-encoded string to a base64 encoded string
     Returns a base64 encoded string

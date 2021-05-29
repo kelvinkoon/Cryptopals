@@ -6,7 +6,7 @@ EXPECTED_STR = "7b5a4215415d544115415d5015455447414c155c46155f4058455c5b523f"
 EXPECTED_DECODED_ASCII_BYTES = b"Now that the party is jumping\n"
 
 
-def detectSingleCharXOR(input_path):
+def detectSingleCharXOR(input_path: str):
     """
     Returns the encoded string, likeliest ASCII bytes, likelihood score, and likeliest key byte
 

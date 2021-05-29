@@ -6,7 +6,7 @@ INPUT_KEY = "686974207468652062756c6c277320657965"
 EXPECTED_STR = "746865206b696420646f6e277420706c6179"
 
 
-def decodeFixedXOR(hex_enc_str, hex_enc_key):
+def decodeFixedXOR(hex_enc_str: str, hex_enc_key: str):
     """
     Operates a fixed XOR between two strings
     Returns a hex-encoded string

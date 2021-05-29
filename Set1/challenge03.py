@@ -38,7 +38,7 @@ CHAR_FREQ_VAL = {
 }
 
 
-def decodeSingleByteXORKey(ascii_bytes, key_byte):
+def decodeSingleByteXORKey(ascii_bytes: bytes, key_byte: bytes):
     """
     XORs an ASCII byte array against a key byte
     Returns an byte array
@@ -53,7 +53,7 @@ def decodeSingleByteXORKey(ascii_bytes, key_byte):
     return xor_bytes
 
 
-def scoreASCIIByteArray(ascii_bytes):
+def scoreASCIIByteArray(ascii_bytes: bytes):
     """
     Returns an integer score based on likelihood ASCII bytes represent an English sentence
 
@@ -68,7 +68,7 @@ def scoreASCIIByteArray(ascii_bytes):
     return score
 
 
-def decodeSingleByteXORCipher(hex_enc_str):
+def decodeSingleByteXORCipher(hex_enc_str: str):
     """
     Brute-forces XOR operations through 256 ASCII keys against a hex-encoded string
     Returns the likeliest decoded ASCII byte array, "score", and likeliest key byte
