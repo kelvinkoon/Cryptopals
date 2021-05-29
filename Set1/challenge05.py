@@ -10,7 +10,7 @@ EXPECTED_STR = "0b3637272a2b2e63622c2e69692a23693a2a3c6324202d623d63343c2a262263
 
 def encodeRepeatingKeyXOR(input_str, input_key):
     """
-    Encodes a string with a repeating key 
+    Encodes a string with a repeating key
     Returns a string encoded using a vigenere cipher
 
     :param input_str The input string
