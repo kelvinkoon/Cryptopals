@@ -3,3 +3,6 @@
 
 Solutions are written in Python3.
 
+### Dependencies
+- `black`
+- `pycrypto`
