@@ -4,5 +4,4 @@
 Solutions are written in Python3.
 
 ### Dependencies
-- `black`
-- `pycrypto`
+Full list of dependencies can be found in `requirements.txt`. `black` is used for Python formatting and `pycrypto` is a useful cryptographic library.
