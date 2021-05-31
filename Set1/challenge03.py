@@ -68,16 +68,13 @@ def scoreASCIIByteArray(ascii_bytes: bytes):
     return score
 
 
-def decodeSingleByteXORCipher(hex_enc_str: str):
+def decodeSingleByteXORCipher(ascii_bytes: bytes):
     """
     Brute-forces XOR operations through 256 ASCII keys against a hex-encoded string
     Returns the likeliest decoded ASCII byte array, "score", and likeliest key byte
 
     :param hex_enc_str A hex-encoded string
     """
-    # Decode inputs from hex
-    input_ascii_bytes = binascii.unhexlify(hex_enc_str.encode())
-
     # Initialize most likely string, score, and key byte
     probable_ascii_bytes = b""
     probable_score = 0
@@ -85,7 +82,7 @@ def decodeSingleByteXORCipher(hex_enc_str: str):
 
     # Attempt 256 ASCII keys
     for key_byte in range(0, 256):
-        decoded_xor_bytes = decodeSingleByteXORKey(input_ascii_bytes, key_byte)
+        decoded_xor_bytes = decodeSingleByteXORKey(ascii_bytes, key_byte)
         decoded_xor_score = scoreASCIIByteArray(decoded_xor_bytes)
 
         if decoded_xor_score > probable_score:
@@ -97,7 +94,12 @@ def decodeSingleByteXORCipher(hex_enc_str: str):
 
 
 def main():
-    output_ascii_bytes, _, output_key_byte = decodeSingleByteXORCipher(INPUT_STR)
+    # Decode inputs from hex
+    input_ascii_bytes = binascii.unhexlify(INPUT_STR.encode())
+
+    output_ascii_bytes, _, output_key_byte = decodeSingleByteXORCipher(
+        input_ascii_bytes
+    )
     assert output_ascii_bytes.decode("utf-8") == EXPECTED_DECODED_ASCII_BYTES.decode(
         "utf-8"
     )
