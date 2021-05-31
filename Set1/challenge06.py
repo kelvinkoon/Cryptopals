@@ -1,6 +1,5 @@
 # https://cryptopals.com/sets/1/challenges/6
 from challenge03 import *
-import binascii
 import base64
 
 CHALLENGE06_FILEPATH = "util/challenge06data.txt"
