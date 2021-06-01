@@ -4,4 +4,4 @@
 Solutions are written in Python3.
 
 ### Dependencies
-Full list of dependencies can be found in `requirements.txt`. Dependencies can be installed (preferably with a virtual environment) done through `pip install -r requirements.txt`. 
+Full list of dependencies can be found in `requirements.txt`. Dependencies can be installed (preferably with a virtual environment) through `pip install -r requirements.txt`. 
