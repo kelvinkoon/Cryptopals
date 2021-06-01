@@ -27,8 +27,8 @@ def decodeFixedXOR(input_ascii_bytes: bytes, key_ascii_bytes: bytes):
 
 def main():
     # Decode inputs from hex
-    input_ascii_bytes = binascii.unhexlify(INPUT_STR.encode())
-    key_ascii_bytes = binascii.unhexlify(INPUT_KEY.encode())
+    input_ascii_bytes = binascii.unhexlify(INPUT_STR.encode("utf-8"))
+    key_ascii_bytes = binascii.unhexlify(INPUT_KEY.encode("utf-8"))
 
     xor_bytes = decodeFixedXOR(input_ascii_bytes, key_ascii_bytes)
     # Re-encode to hex

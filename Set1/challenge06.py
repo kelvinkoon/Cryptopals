@@ -63,17 +63,12 @@ def breakASCIIBytesIntoBlocks(ascii_bytes: bytes, block_size: int):
     return blocks
 
 
-def breakRepeatingKeyXOR(input_path):
+def breakRepeatingKeyXOR(ascii_bytes: bytes):
     """
     Returns the probable key bytes, probable keysize, and "likelihood" score
 
-    :param input_path Path to file of base64-encoded ciphertext
+    :param ascii_bytes ASCII byte array to retrieve key from
     """
-    # Read file
-    input_file = open(input_path, "r")
-    base64_enc_str = input_file.read()
-    # Decode from base64
-    ascii_bytes = base64.b64decode(base64_enc_str)
 
     # Attempt range of key sizes
     key_size_distances = {}
@@ -146,7 +141,12 @@ def main():
     assert hamming_distance == 37
 
     # Test repeating key XOR decode
-    probable_key_bytes, _, _ = breakRepeatingKeyXOR(CHALLENGE06_FILEPATH)
+    # Read file
+    input_file = open(CHALLENGE06_FILEPATH, "r")
+    base64_enc_str = input_file.read()
+    # Decode from base64
+    ascii_bytes = base64.b64decode(base64_enc_str)
+    probable_key_bytes, _, _ = breakRepeatingKeyXOR(ascii_bytes)
     output_key_str = probable_key_bytes.decode("utf-8")
     assert output_key_str == EXPECTED_KEY_STR
 

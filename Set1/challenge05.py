@@ -16,7 +16,6 @@ def encodeRepeatingKeyXOR(ascii_bytes: bytes, key_bytes: bytes):
     :param ascii_bytes ASCII byte array to be encoded
     :param key_bytes ASCII byte array acting as key
     """
-
     xor_bytes = b""
     for i in range(0, len(ascii_bytes)):
         # XOR with repeating key
