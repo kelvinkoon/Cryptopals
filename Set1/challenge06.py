@@ -56,7 +56,10 @@ def breakASCIIBytesIntoBlocks(ascii_bytes: bytes, block_size: int):
     """
     blocks = []
     num_blocks = len(ascii_bytes) // block_size
-    for i in range(0, num_blocks + 1):
+    # Add additional block for remaining bytes
+    if len(ascii_bytes) % block_size != 0:
+        num_blocks += 1
+    for i in range(0, num_blocks):
         curr_block = takeBlock(ascii_bytes, i * block_size, i * block_size + block_size)
         blocks.append(curr_block)
 

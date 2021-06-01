@@ -22,9 +22,9 @@ def decryptAES128_ECBMode(ascii_bytes: bytes, key_byte: bytes):
 def main():
     # Read file
     input_file = open(CHALLENGE07_FILEPATH, "r")
-    enc_str = input_file.read()
+    base64_enc_str = input_file.read()
     # Decode from base64
-    ascii_bytes = base64.b64decode(enc_str)
+    ascii_bytes = base64.b64decode(base64_enc_str)
     key_bytes = INPUT_KEY_STR.encode("utf-8")
 
     plaintext_bytes = decryptAES128_ECBMode(ascii_bytes, key_bytes)
