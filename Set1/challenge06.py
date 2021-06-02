@@ -3,7 +3,7 @@ from challenge03 import *
 from typing import List, Union
 import base64
 
-CHALLENGE06_FILEPATH = "util/challenge06data.txt"
+CHALLENGE06_FILEPATH = "utils/challenge06data.txt"
 HAMMING_DIST_INPUT_STR1 = "this is a test"
 HAMMING_DIST_INPUT_STR2 = "wokka wokka!!!"
 EXPECTED_DISTANCE = 37
