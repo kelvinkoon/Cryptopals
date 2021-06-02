@@ -2,7 +2,7 @@
 import binascii
 
 INPUT_STR = "1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736"
-EXPECTED_DECODED_ASCII_BYTES = b"Cooking MC's like a pound of bacon"
+EXPECTED_DECODED_BYTES = b"Cooking MC's like a pound of bacon"
 EXPECTED_KEY_BYTES = b"X"
 
 # Taken from https://crypto.stackexchange.com/a/40930
@@ -38,42 +38,42 @@ CHAR_FREQ_VAL = {
 }
 
 
-def decodeSingleByteXORKey(ascii_bytes: bytes, key_byte: bytes):
+def decodeSingleByteXORKey(input_bytes: bytes, key_byte: bytes):
     """
-    XORs an ASCII byte array against a key byte
+    XORs a byte array against a key byte
     Returns an byte array
 
-    :param ascii_byte A byte array of ASCII characters
+    :param input_bytes A byte array to decode
     :param key_byte A byte representing a key
     """
     xor_bytes = b""
-    for i in range(0, len(ascii_bytes)):
-        xor_bytes += bytes([ascii_bytes[i] ^ key_byte])
+    for i in range(0, len(input_bytes)):
+        xor_bytes += bytes([input_bytes[i] ^ key_byte])
 
     return xor_bytes
 
 
-def scoreASCIIByteArray(ascii_bytes: bytes):
+def scoreByteArray(input_bytes: bytes):
     """
     Returns an integer score based on likelihood ASCII bytes represent an English sentence
 
-    :param ascii_byte A byte array of ASCII characters
+    :param input_bytes A byte array to be scored
     """
     score = 0
-    for ascii_byte in ascii_bytes:
+    for input_byte in input_bytes:
         # Score according to character frequency dictionary
         # Ignore values outside of dictionary
-        score += CHAR_FREQ_VAL.get(chr(ascii_byte).lower(), 0)
+        score += CHAR_FREQ_VAL.get(chr(input_byte).lower(), 0)
 
     return score
 
 
-def decodeSingleByteXORCipher(ascii_bytes: bytes):
+def decodeSingleByteXORCipher(input_bytes: bytes):
     """
-    Brute-forces XOR operations through 256 ASCII keys against a hex-encoded string
-    Returns the likeliest decoded ASCII byte array, "score", and likeliest key byte
+    Brute-forces XOR operations through 256 ASCII keys against the input byte array
+    Returns the likeliest decoded byte array, "score", and likeliest key byte
 
-    :param hex_enc_str A hex-encoded string
+    :param input_bytes The input byte array to be decoded
     """
     # Initialize most likely string, score, and key byte
     probable_ascii_bytes = b""
@@ -82,8 +82,8 @@ def decodeSingleByteXORCipher(ascii_bytes: bytes):
 
     # Attempt 256 ASCII keys
     for key_byte in range(0, 256):
-        decoded_xor_bytes = decodeSingleByteXORKey(ascii_bytes, key_byte)
-        decoded_xor_score = scoreASCIIByteArray(decoded_xor_bytes)
+        decoded_xor_bytes = decodeSingleByteXORKey(input_bytes, key_byte)
+        decoded_xor_score = scoreByteArray(decoded_xor_bytes)
 
         if decoded_xor_score > probable_score:
             probable_ascii_bytes = decoded_xor_bytes
@@ -95,12 +95,10 @@ def decodeSingleByteXORCipher(ascii_bytes: bytes):
 
 def main():
     # Decode inputs from hex
-    input_ascii_bytes = binascii.unhexlify(INPUT_STR.encode())
+    input_bytes = binascii.unhexlify(INPUT_STR.encode())
 
-    output_ascii_bytes, _, output_key_byte = decodeSingleByteXORCipher(
-        input_ascii_bytes
-    )
-    assert output_ascii_bytes.decode("utf-8") == EXPECTED_DECODED_ASCII_BYTES.decode(
+    probable_ascii_bytes, _, output_key_byte = decodeSingleByteXORCipher(input_bytes)
+    assert probable_ascii_bytes.decode("utf-8") == EXPECTED_DECODED_BYTES.decode(
         "utf-8"
     )
     assert output_key_byte.decode("utf-8") == EXPECTED_KEY_BYTES.decode("utf-8")

@@ -1,13 +1,14 @@
 # https://cryptopals.com/sets/1/challenges/4
 from challenge03 import *
+from typing import List
 import binascii
 
 CHALLENGE04_FILEPATH = "util/challenge04data.txt"
 EXPECTED_STR = "7b5a4215415d544115415d5015455447414c155c46155f4058455c5b523f"
-EXPECTED_DECODED_ASCII_BYTES = b"Now that the party is jumping\n"
+EXPECTED_DECODED_BYTES = b"Now that the party is jumping\n"
 
 
-def detectSingleCharXOR(enc_char_strs: list[str]):
+def detectSingleCharXOR(enc_char_strs: List[str]):
     """
     Returns the encoded string, likeliest ASCII bytes, likelihood score, and likeliest key byte
 
@@ -42,9 +43,10 @@ def main():
     # Read from file
     input_file = open(CHALLENGE04_FILEPATH, "r")
     enc_char_strs = input_file.readlines()
+
     xor_str, probable_ascii_bytes, _, _ = detectSingleCharXOR(enc_char_strs)
     assert xor_str.strip() == EXPECTED_STR.strip()
-    assert probable_ascii_bytes.decode("utf-8") == EXPECTED_DECODED_ASCII_BYTES.decode(
+    assert probable_ascii_bytes.decode("utf-8") == EXPECTED_DECODED_BYTES.decode(
         "utf-8"
     )
 

@@ -4,7 +4,7 @@ EXPECTED_BYTES = b"YELLOW SUBMARINE\x04\x04\x04\x04"
 
 def addPKCS7Padding(ascii_bytes: bytes, block_size: int):
     """
-    Returns the ASCII byte array padded with PKCS#7 padding based on block size
+    Returns the byte array padded with PKCS#7 padding based on block size
 
     :param ascii_bytes The ASCII byte array to be padded
     :param block_size The block size to be padded evenly to

@@ -14,9 +14,9 @@ def convertHexToBase64(hex_enc_str: str):
     :param hex_enc_str A hex-encoded string
     """
     # Decode hex to ASCII
-    ascii_bytes = binascii.unhexlify(hex_enc_str.encode("utf-8"))
+    input_bytes = binascii.unhexlify(hex_enc_str.encode("utf-8"))
     # Encode ASCII to base64
-    base64_bytes = base64.b64encode(ascii_bytes)
+    base64_bytes = base64.b64encode(input_bytes)
     # Convert from bytes to string representation
     base64_str = base64_bytes.decode("utf-8")
     return base64_str
