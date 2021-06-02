@@ -1,5 +1,6 @@
 # https://cryptopals.com/sets/1/challenges/6
 from challenge03 import *
+from typing import List, Union
 import base64
 
 CHALLENGE06_FILEPATH = "util/challenge06data.txt"
@@ -11,7 +12,7 @@ EXPECTED_KEY_STR = "Terminator X: Bring the noise"
 GUESS_LEN = 40
 
 
-def calculateHammingDistance(input_bytes1: bytes, input_bytes2: bytes):
+def calculateHammingDistance(input_bytes1: bytes, input_bytes2: bytes) -> int:
     """
     Returns the Hamming Distance between two byte arrays
 
@@ -35,7 +36,7 @@ def calculateHammingDistance(input_bytes1: bytes, input_bytes2: bytes):
     return distance
 
 
-def takeBlock(input_bytes: bytes, begin: int, end: int):
+def takeBlock(input_bytes: bytes, begin: int, end: int) -> bytes:
     """
     Returns a block of bytes specified by beginning and end indices
 
@@ -46,7 +47,7 @@ def takeBlock(input_bytes: bytes, begin: int, end: int):
     return input_bytes[begin:end]
 
 
-def breakByteArrayIntoBlocks(input_bytes: bytes, block_size: int):
+def breakByteArrayIntoBlocks(input_bytes: bytes, block_size: int) -> List[bytes]:
     """
     Break byte array into blocks of specified length
     Returns a list of byte arrays
@@ -66,7 +67,7 @@ def breakByteArrayIntoBlocks(input_bytes: bytes, block_size: int):
     return blocks
 
 
-def breakRepeatingKeyXOR(input_bytes: bytes):
+def breakRepeatingKeyXOR(input_bytes: bytes) -> Union[bytes, int, int]:
     """
     Returns the probable key bytes, probable keysize, and "likelihood" score
 

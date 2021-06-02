@@ -1,4 +1,5 @@
 # https://cryptopals.com/sets/1/challenges/3
+from typing import Union
 import binascii
 
 INPUT_STR = "1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736"
@@ -38,7 +39,7 @@ CHAR_FREQ_VAL = {
 }
 
 
-def decodeSingleByteXORKey(input_bytes: bytes, key_byte: bytes):
+def decodeSingleByteXORKey(input_bytes: bytes, key_byte: bytes) -> bytes:
     """
     XORs a byte array against a key byte
     Returns an byte array
@@ -53,7 +54,7 @@ def decodeSingleByteXORKey(input_bytes: bytes, key_byte: bytes):
     return xor_bytes
 
 
-def scoreByteArray(input_bytes: bytes):
+def scoreByteArray(input_bytes: bytes) -> int:
     """
     Returns an integer score based on likelihood ASCII bytes represent an English sentence
 
@@ -68,7 +69,7 @@ def scoreByteArray(input_bytes: bytes):
     return score
 
 
-def decodeSingleByteXORCipher(input_bytes: bytes):
+def decodeSingleByteXORCipher(input_bytes: bytes) -> Union[bytes, int, bytes]:
     """
     Brute-forces XOR operations through 256 ASCII keys against the input byte array
     Returns the likeliest decoded byte array, "score", and likeliest key byte

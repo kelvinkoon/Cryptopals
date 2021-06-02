@@ -6,7 +6,7 @@ INPUT_KEY = "686974207468652062756c6c277320657965"
 EXPECTED_STR = "746865206b696420646f6e277420706c6179"
 
 
-def decodeFixedXOR(input_bytes: bytes, key_bytes: bytes):
+def decodeFixedXOR(input_bytes: bytes, key_bytes: bytes) -> bytes:
     """
     Operates a fixed XOR between two byte arrays
     Returns a fixed XOR byte array

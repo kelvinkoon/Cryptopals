@@ -1,6 +1,6 @@
 # https://cryptopals.com/sets/1/challenges/4
 from challenge03 import *
-from typing import List
+from typing import List, Union
 import binascii
 
 CHALLENGE04_FILEPATH = "util/challenge04data.txt"
@@ -8,7 +8,7 @@ EXPECTED_STR = "7b5a4215415d544115415d5015455447414c155c46155f4058455c5b523f"
 EXPECTED_DECODED_BYTES = b"Now that the party is jumping\n"
 
 
-def detectSingleCharXOR(enc_char_strs: List[str]):
+def detectSingleCharXOR(enc_char_strs: List[str]) -> Union[str, bytes, int, bytes]:
     """
     Returns the encoded string, likeliest ASCII bytes, likelihood score, and likeliest key byte
 

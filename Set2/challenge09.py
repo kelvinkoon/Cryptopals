@@ -2,19 +2,19 @@ INPUT_STR = "YELLOW SUBMARINE"
 EXPECTED_BYTES = b"YELLOW SUBMARINE\x04\x04\x04\x04"
 
 
-def addPKCS7Padding(ascii_bytes: bytes, block_size: int):
+def addPKCS7Padding(input_bytes: bytes, block_size: int) -> bytes:
     """
     Returns the byte array padded with PKCS#7 padding based on block size
 
-    :param ascii_bytes The ASCII byte array to be padded
+    :param input_bytes The byte array to be padded
     :param block_size The block size to be padded evenly to
     """
     # Determine amount of padding required
-    num_padding = block_size - (len(ascii_bytes) % block_size)
-    padded_ascii_bytes = ascii_bytes
-    padded_ascii_bytes += num_padding * bytes([num_padding])
+    num_padding = block_size - (len(input_bytes) % block_size)
+    padded_bytes = input_bytes
+    padded_bytes += num_padding * bytes([num_padding])
 
-    return padded_ascii_bytes
+    return padded_bytes
 
 
 def main():
