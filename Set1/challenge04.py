@@ -3,10 +3,6 @@ from challenge03 import *
 from typing import List, Union
 import binascii
 
-CHALLENGE04_FILEPATH = "utils/challenge04data.txt"
-EXPECTED_STR = "7b5a4215415d544115415d5015455447414c155c46155f4058455c5b523f"
-EXPECTED_DECODED_BYTES = b"Now that the party is jumping\n"
-
 
 def detectSingleCharXOR(enc_char_strs: List[str]) -> Union[str, bytes, int, bytes]:
     """
@@ -37,19 +33,3 @@ def detectSingleCharXOR(enc_char_strs: List[str]) -> Union[str, bytes, int, byte
             probable_key_byte = curr_probable_key_byte
 
     return xor_str, probable_ascii_bytes, probable_score, probable_key_byte
-
-
-def main():
-    # Read from file
-    input_file = open(CHALLENGE04_FILEPATH, "r")
-    enc_char_strs = input_file.readlines()
-
-    xor_str, probable_ascii_bytes, _, _ = detectSingleCharXOR(enc_char_strs)
-    assert xor_str.strip() == EXPECTED_STR.strip()
-    assert probable_ascii_bytes.decode("utf-8") == EXPECTED_DECODED_BYTES.decode(
-        "utf-8"
-    )
-
-
-if __name__ == "__main__":
-    main()

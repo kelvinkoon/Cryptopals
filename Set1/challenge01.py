@@ -2,9 +2,6 @@
 import binascii
 import base64
 
-INPUT_STR = "49276d206b696c6c696e6720796f757220627261696e206c696b65206120706f69736f6e6f7573206d757368726f6f6d"
-EXPECTED_STR = "SSdtIGtpbGxpbmcgeW91ciBicmFpbiBsaWtlIGEgcG9pc29ub3VzIG11c2hyb29t"
-
 
 def convertHexToBase64(hex_enc_str: str) -> str:
     """
@@ -20,12 +17,3 @@ def convertHexToBase64(hex_enc_str: str) -> str:
     # Convert from bytes to string representation
     base64_str = base64_bytes.decode("utf-8")
     return base64_str
-
-
-def main():
-    output_str = convertHexToBase64(INPUT_STR)
-    assert output_str == EXPECTED_STR
-
-
-if __name__ == "__main__":
-    main()
