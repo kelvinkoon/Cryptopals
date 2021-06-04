@@ -12,7 +12,7 @@ def hashBytesToSHA1Str(input_bytes: bytes) -> str:
     h.update(input_bytes)
     return h.hexdigest()
 
-# Set 1 Functions
+# Set 1 
 # Challenge 2
 def decodeFixedXOR(input_bytes: bytes, key_bytes: bytes) -> bytes:
     """
