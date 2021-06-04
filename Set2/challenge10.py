@@ -20,6 +20,7 @@ def encryptAES_CBCMode(
     :param init_vector_bytes The initialization vector for CBC Mode
     :param key_bytes The key to initialize the cipher with
     """
+    input_bytes = addBitPadding(input_bytes, BLOCK_SIZE)
     bytes_blocks = breakByteArrayIntoBlocks(input_bytes, BLOCK_SIZE)
 
     # Initialize the ciphertext with first block and initialization vector
@@ -47,6 +48,7 @@ def decryptAES_CBCMode(
     :param init_vector_bytes The initialization vector for CBC Mode
     :param key_bytes The key to initialize the cipher with
     """
+    input_bytes = addBitPadding(input_bytes, BLOCK_SIZE)
     bytes_blocks = breakByteArrayIntoBlocks(input_bytes, BLOCK_SIZE)
 
     # Initialize the plaintext with first block and initialization vector
@@ -54,12 +56,6 @@ def decryptAES_CBCMode(
     plaintext_block = b""
 
     for i in range(0, len(bytes_blocks)):
-        if len(bytes_blocks[i]) != BLOCK_SIZE:
-            # Pad to 16 bytes (not to be confused with PKCS#7 padding)
-            # Last input block does not fill into 16 byte block
-            num_padding = BLOCK_SIZE - len(bytes_blocks[i])
-            bytes_blocks[i] += b"\x00" * num_padding
-
         aes_ecb_decrypt_block = decryptAES_ECBMode(bytes_blocks[i], key_bytes)
         curr_xor_block = decodeFixedXOR(aes_ecb_decrypt_block, prev_block)
         prev_block = bytes_blocks[i]
