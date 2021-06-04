@@ -2,6 +2,7 @@
 import sys
 
 sys.path.append("./")
+
 from shared_functions import *
 from challenge09 import *
 

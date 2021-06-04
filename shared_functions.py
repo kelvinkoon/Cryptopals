@@ -1,6 +1,13 @@
 # File for commonly used functions between Challenge Sets
 from Crypto.Cipher import AES
+from Crypto.Hash import SHA1
 from typing import List
+
+# Testing utilities
+def hashBytesToSHA1Str(input_bytes: bytes) -> str:
+    h = SHA1.new()
+    h.update(input_bytes)
+    return h.hexdigest()
 
 # Set 1 Functions
 # Challenge 2
