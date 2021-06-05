@@ -1,13 +1,7 @@
 # https://cryptopals.com/sets/2/challenges/11
-import sys
-
-sys.path.append("./")
-
-from shared_functions import (
-    breakByteArrayIntoBlocks,
-    encryptAES_CBCMode,
-    encryptAES_ECBMode,
-)
+from shared.validation_functions import *
+from Set1.challenge06 import *
+from Set2.challenge10 import *
 import secrets
 import random
 from typing import Union
@@ -48,13 +42,15 @@ def encryptECB_CBCOracle(plaintext_bytes: bytes, key_bytes: bytes) -> Union[byte
     # Choose ECB or CBC encryption randomly
     if random.randint(0, 1) == 0:
         # Choose ECB encryption
-        encrypted_bytes = encryptAES_ECBMode(padded_plaintext_bytes, key_bytes)
+        encrypted_bytes = encryptAES_ECBModePKCS7Padded(
+            padded_plaintext_bytes, key_bytes
+        )
         encryption_mode_str = "ECB"
     else:
         # Choose CBC encryption
         # Generate random IV
         init_vector_bytes = secrets.token_bytes(BLOCK_SIZE)
-        encrypted_bytes = encryptAES_CBCMode(
+        encrypted_bytes = encryptAES_CBCModePKCS7Padded(
             padded_plaintext_bytes, init_vector_bytes, key_bytes
         )
         encryption_mode_str = "CBC"

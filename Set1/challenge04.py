@@ -1,5 +1,5 @@
 # https://cryptopals.com/sets/1/challenges/4
-from challenge03 import *
+from Set1.challenge03 import *
 from typing import List, Union
 import binascii
 

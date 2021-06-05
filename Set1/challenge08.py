@@ -1,7 +1,7 @@
 # https://cryptopals.com/sets/1/challenges/8
 import binascii
 from typing import List
-from challenge06 import *
+from Set1.challenge06 import *
 
 
 def detectAES_ECBMode(hex_enc_strs: List[str]) -> bytes:

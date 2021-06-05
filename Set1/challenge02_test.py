@@ -1,4 +1,4 @@
-from challenge02 import *
+from Set1.challenge02 import *
 import binascii
 
 INPUT_STR = "1c0111001f010100061a024b53535009181c"

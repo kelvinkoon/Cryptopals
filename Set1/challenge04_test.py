@@ -1,9 +1,5 @@
-import sys
-
-sys.path.append("./")
-
-from shared_functions import *
-from challenge04 import *
+from Set1.challenge04 import *
+from shared.validation_functions import *
 
 CHALLENGE04_FILEPATH = "Set1/utils/challenge04data.txt"
 EXPECTED_HASH_HEX_STR = "fb3544ef78a3afde86e701a90305b489cd6a1ad6"

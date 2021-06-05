@@ -1,4 +1,4 @@
-from challenge05 import *
+from Set1.challenge05 import *
 import binascii
 
 INPUT_STR = (

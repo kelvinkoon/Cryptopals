@@ -1,5 +1,5 @@
 # https://cryptopals.com/sets/1/challenges/6
-from challenge03 import *
+from Set1.challenge03 import *
 from typing import List, Union
 
 GUESS_LEN = 40

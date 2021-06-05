@@ -1,4 +1,4 @@
-from challenge11 import *
+from Set2.challenge11 import *
 
 NUM_ITERATIONS = 200
 

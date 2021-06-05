@@ -1,9 +1,5 @@
-import sys
-
-sys.path.append("./")
-
-from shared_functions import *
-from challenge03 import *
+from Set1.challenge03 import *
+from shared.validation_functions import *
 import binascii
 
 INPUT_STR = "1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736"

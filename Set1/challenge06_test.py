@@ -1,9 +1,5 @@
-import sys
-
-sys.path.append("./")
-
-from shared_functions import *
-from challenge06 import *
+from Set1.challenge06 import *
+from shared.validation_functions import *
 import base64
 
 CHALLENGE06_FILEPATH = "Set1/utils/challenge06data.txt"
