@@ -58,23 +58,24 @@ def breakOracleByteAtATimeSimple(ecb_oracle: ECBOracle) -> bytes:
     #         print(bytes([guess_byte]))
     # TODO: Add logic to calculate
     num_blocks = 10
-    for i in range(0, 1):
-        decrypted_block = b""
+    result_bytes = b""
+    for i in range(0, 11):
+        print("Starting new block")
         for j in range(1, block_size+1):
             # Send one-byte-short input
             one_byte_short_input_bytes = b"A"*(block_size - j) 
             one_byte_short_oracle_bytes = ecb_oracle.encrypt(one_byte_short_input_bytes) 
             # Try letters
             for guess_byte in range(0, 128):
-                curr_guess_bytes = b"A"*(block_size - j) + decrypted_block + bytes([guess_byte])
+                curr_guess_bytes = b"A"*(block_size - j) + result_bytes + bytes([guess_byte])
+                print(curr_guess_bytes)
                 curr_guess_oracle_bytes = ecb_oracle.encrypt(curr_guess_bytes)
-                # if one_byte_short_oracle_bytes[i:i+block_size + block_size] == curr_guess_oracle_bytes[i:i*block_size + block_size]:
-                if one_byte_short_oracle_bytes[:16] == curr_guess_oracle_bytes[:16]:
+                if one_byte_short_oracle_bytes[i*block_size:i*block_size + block_size] == curr_guess_oracle_bytes[i*block_size:i*block_size + block_size]:
                     print("FOUND BYTE")
                     print(bytes([guess_byte]))
                     # Add to current block result
-                    print("CURR DECRYPT")
-                    decrypted_block += bytes([guess_byte])
-                    print(decrypted_block)
+                    result_bytes += bytes([guess_byte])
                     break
+    print("RESULT")
+    print(removePKCS7Padding(result_bytes))
 
