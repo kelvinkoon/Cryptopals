@@ -9,6 +9,40 @@ from typing import Union
 BLOCK_SIZE = 16
 
 
+class ECB_CBCOracle:
+    """
+    An oracle encrypting using ECB or CBC mode
+    Encryption mode is chosen on initialization
+    """
+
+    def __init__(self):
+        self.random_key = generateRandomAESKey()
+        self.encryption_mode = "ECB" if random.randint(0, 1) else "CBC"
+
+    def get_EncryptionMode(self):
+        return self.encryption_mode
+
+    def encrypt(self, plaintext_bytes):
+        padded_plaintext_bytes = (
+            secrets.token_bytes(random.randint(5, 10))
+            + plaintext_bytes
+            + secrets.token_bytes(random.randint(5, 10))
+        )
+
+        encrypted_bytes = b""
+        if self.get_EncryptionMode() == "ECB":
+            encrypted_bytes = encryptAES_ECBModePKCS7Padded(
+                padded_plaintext_bytes, self.random_key
+            )
+        else:
+            init_vector_bytes = secrets.token_bytes(BLOCK_SIZE)
+            encrypted_bytes = encryptAES_CBCModePKCS7Padded(
+                padded_plaintext_bytes, init_vector_bytes, self.random_key
+            )
+
+        return encrypted_bytes
+
+
 def detectECB_CBC(ciphertext_bytes: bytes) -> str:
     """
     Returns the string indicating if ciphertext has been encrypted using AES ECB or CBC mode
@@ -21,41 +55,6 @@ def detectECB_CBC(ciphertext_bytes: bytes) -> str:
         return "ECB"
     else:
         return "CBC"
-
-
-def encryptECB_CBCOracle(plaintext_bytes: bytes, key_bytes: bytes) -> Union[bytes, str]:
-    """
-    Returns an encrypted byte array and encryption mode randomly chosen between ECB and CBC
-    If CBC mode is chosen, randomly choose the initialization vector
-
-    :param plaintext_bytes The byte array to encrypt
-    :param key_bytes The key to encode
-    """
-    padded_plaintext_bytes = (
-        secrets.token_bytes(random.randint(5, 10))
-        + plaintext_bytes
-        + secrets.token_bytes(random.randint(5, 10))
-    )
-    encrypted_bytes = b""
-    encryption_mode_str = ""
-
-    # Choose ECB or CBC encryption randomly
-    if random.randint(0, 1) == 0:
-        # Choose ECB encryption
-        encrypted_bytes = encryptAES_ECBModePKCS7Padded(
-            padded_plaintext_bytes, key_bytes
-        )
-        encryption_mode_str = "ECB"
-    else:
-        # Choose CBC encryption
-        # Generate random IV
-        init_vector_bytes = secrets.token_bytes(BLOCK_SIZE)
-        encrypted_bytes = encryptAES_CBCModePKCS7Padded(
-            padded_plaintext_bytes, init_vector_bytes, key_bytes
-        )
-        encryption_mode_str = "CBC"
-
-    return encrypted_bytes, encryption_mode_str
 
 
 def generateRandomAESKey() -> bytes:
