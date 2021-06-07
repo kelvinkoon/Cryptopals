@@ -20,6 +20,11 @@ class ECBOracle:
         self.random_key = generateRandomAESKey()
 
     def encrypt(self, plaintext_bytes):
+        """
+        Returns AES-128-ECB(`your-string || unknown_string, random-key`) as an encryption oracle
+
+        :param plaintext_bytes The plaintext bytes to encrypt
+        """
         ecb_input_bytes = plaintext_bytes + self.unknown_encrypted_bytes
         encrypted_bytes = encryptAES_ECBModePKCS7Padded(
             ecb_input_bytes, self.random_key
