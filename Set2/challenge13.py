@@ -83,6 +83,7 @@ def executeECBCutAndPaste(profile_oracle: ProfileOracle) -> bytes:
     """
     Generates a ciphertext byte array through an ECB cut-and-paste attack
     `createProfile` acts as an oracle to generate usable blocks
+    Returns the ciphertext byte array which decrypts to a profile with an admin role
 
     :param profile_oracle The ProfileOracle to create profiles and encrypt/decrypt
     """
@@ -120,8 +121,5 @@ def executeECBCutAndPaste(profile_oracle: ProfileOracle) -> bytes:
     )
     admin_block_bytes = encrypted_admin_inserted_ciphertext_bytes[16:32]
     # Replace admin-inserted second block with target ciphertext's third block
-    result_block_bytes += admin_block_bytes
-
-    # Decrypt the result
-    admin_ciphertext_bytes = profile_oracle.decrypt(result_block_bytes)
+    admin_ciphertext_bytes = result_block_bytes + admin_block_bytes
     return admin_ciphertext_bytes
