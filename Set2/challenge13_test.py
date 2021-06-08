@@ -3,7 +3,8 @@ from Set2.challenge13 import *
 INPUT_COOKIE_STR = "foo=bar&baz=qux&zap=zazzle"
 EXPECTED_COOKIE_OBJ = {"foo": "bar", "baz": "qux", "zap": "zazzle"}
 INVALID_PROFILE_STR = "email=foo@bar.com&role=admin&uid=10&role=user"
-EXPECTED_PROFILE_STR1 = "email=foo@bar.com&uid=10&role=user"
+EXPECTED_PROFILE_STR = "email=foo@bar.com&uid=10&role=user"
+EXPECTED_ADMIN_STR = "email=abcde@bar.com&uid=10&role=admin"
 
 
 def test_parseCookie():
@@ -14,7 +15,7 @@ def test_parseCookie():
 def test_createProfile():
     profile_oracle = ProfileOracle()
     profile_str = profile_oracle.createProfile("foo@bar.com")
-    assert profile_str == EXPECTED_PROFILE_STR1
+    assert profile_str == EXPECTED_PROFILE_STR
 
 
 def test_createProfileInvalidChars():
@@ -26,6 +27,13 @@ def test_createProfileInvalidChars():
 def test_OracleEncryptDecrypt():
     profile_oracle = ProfileOracle()
     profile_str = profile_oracle.createProfile("foo@bar.com")
-    encoded_profile_bytes = profile_oracle.encrypt(profile_str)
-    plaintext_profile_str = profile_oracle.decrypt(encoded_profile_bytes)
-    assert plaintext_profile_str == EXPECTED_PROFILE_STR1
+    profile_bytes = profile_str.encode("utf-8")
+    encoded_profile_bytes = profile_oracle.encrypt(profile_bytes)
+    plaintext_profile_bytes = profile_oracle.decrypt(encoded_profile_bytes)
+    assert plaintext_profile_bytes.decode("utf-8") == EXPECTED_PROFILE_STR
+
+
+def test_executeECBCutAndPaste():
+    profile_oracle = ProfileOracle()
+    admin_ciphertext_bytes = executeECBCutAndPaste(profile_oracle)
+    assert admin_ciphertext_bytes.decode("utf-8") == EXPECTED_ADMIN_STR
