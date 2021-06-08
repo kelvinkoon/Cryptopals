@@ -108,10 +108,10 @@ def executeECBCutAndPaste(profile_oracle: ProfileOracle) -> bytes:
     2nd Block: `admin + b"\x0b"*11`
     3rd Block: `&uid=11&role=user`
     """
-    garbage_pad_block_bytes = "a" * 10
-    admin_inserted_block_bytes = "admin" + "\x0b" * 11
+    garbage_pad_block_str = "a" * 10
+    admin_inserted_block_str = "admin" + "\x0b" * 11
     admin_inserted_profile_str = profile_oracle.createProfile(
-        garbage_pad_block_bytes + admin_inserted_block_bytes
+        garbage_pad_block_str + admin_inserted_block_str
     )
     admin_inserted_ciphertext_bytes = admin_inserted_profile_str.encode("utf-8")
 
