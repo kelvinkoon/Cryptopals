@@ -36,4 +36,5 @@ def test_OracleEncryptDecrypt():
 def test_executeECBCutAndPaste():
     profile_oracle = ProfileOracle()
     admin_ciphertext_bytes = executeECBCutAndPaste(profile_oracle)
-    assert admin_ciphertext_bytes.decode("utf-8") == EXPECTED_ADMIN_STR
+    cut_and_paste_obj = parseProfileCookie(admin_ciphertext_bytes.decode("utf-8"))
+    assert cut_and_paste_obj["role"] == "admin"
