@@ -4,7 +4,6 @@ from Set1.challenge06 import *
 from Set2.challenge10 import *
 import secrets
 import random
-from typing import Union
 
 BLOCK_SIZE = 16
 
