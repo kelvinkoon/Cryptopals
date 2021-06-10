@@ -24,7 +24,7 @@ class HarderECBOracle:
         self.random_key = generateRandomAESKey()
         self.random_prefix = secrets.token_bytes(random.randint(1, 15))
 
-    def encrypt(self, plaintext_bytes):
+    def encrypt(self, plaintext_bytes: bytes):
         """
         Returns AES-128-ECB(`your-string || unknown_string, random-key`) as an encryption oracle
 
