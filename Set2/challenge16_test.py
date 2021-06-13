@@ -7,7 +7,7 @@ def test_CBCOracleEncryptDecrypt():
     cbc_oracle = CBCOracle()
     input_bytes = b"helloworld"
     ciphertext_bytes = cbc_oracle.encrypt(input_bytes)
-    plaintext_bytes = cbc_oracle.decrypt(ciphertext_bytes)
+    plaintext_bytes, _ = cbc_oracle.decryptAndCheckAdmin(ciphertext_bytes)
     assert plaintext_bytes == EXPECTED_ENCRYPT_DECRYPT_BYTES
 
 
@@ -15,5 +15,11 @@ def test_CBCOracleMetaCharacters():
     cbc_oracle = CBCOracle()
     input_bytes = b"=hello;world"
     ciphertext_bytes = cbc_oracle.encrypt(input_bytes)
-    plaintext_bytes = cbc_oracle.decrypt(ciphertext_bytes)
+    plaintext_bytes, _ = cbc_oracle.decryptAndCheckAdmin(ciphertext_bytes)
     assert plaintext_bytes == EXPECTED_ENCRYPT_DECRYPT_BYTES
+
+
+def test_executeBitFlipAttack():
+    cbc_oracle = CBCOracle()
+    is_admin_present = executeBitFlipAttack(cbc_oracle)
+    assert is_admin_present == True

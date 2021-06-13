@@ -2,6 +2,8 @@
 from Set2.challenge11 import generateRandomAESKey
 from Set1.challenge07 import *
 
+BLOCK_SIZE = 16
+
 
 def parseProfileCookie(cookie_str: str) -> dict[str, str]:
     """
@@ -98,7 +100,7 @@ def executeECBCutAndPaste(profile_oracle: ProfileOracle) -> bytes:
 
     # Encrypt and take first two blocks
     encrypted_target_ciphertext_bytes = profile_oracle.encrypt(target_ciphertext_bytes)
-    result_block_bytes = encrypted_target_ciphertext_bytes[:32]
+    result_block_bytes = encrypted_target_ciphertext_bytes[: 2 * BLOCK_SIZE]
 
     # Generate ciphertext where 2nd block begins with admin role
     # Fill first block and insert second block using `createProfile`
@@ -119,7 +121,9 @@ def executeECBCutAndPaste(profile_oracle: ProfileOracle) -> bytes:
     encrypted_admin_inserted_ciphertext_bytes = profile_oracle.encrypt(
         admin_inserted_ciphertext_bytes
     )
-    admin_block_bytes = encrypted_admin_inserted_ciphertext_bytes[16:32]
+    admin_block_bytes = encrypted_admin_inserted_ciphertext_bytes[
+        1 * BLOCK_SIZE : 2 * BLOCK_SIZE
+    ]
     # Replace admin-inserted second block with target ciphertext's third block
     admin_ciphertext_bytes = result_block_bytes + admin_block_bytes
     return admin_ciphertext_bytes
