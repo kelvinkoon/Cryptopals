@@ -1,7 +1,7 @@
 from Set2.challenge14 import *
 from shared.validation_functions import *
 
-NUM_ITERATIONS = 100
+NUM_ITERATIONS = 50
 EXPECTED_HASH_HEX_STR = "0f7a938a0a6fc97f763710454b139317f4db7ed2"
 
 
