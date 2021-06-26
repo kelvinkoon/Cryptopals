@@ -33,17 +33,40 @@ class CBCPaddingOracle:
 
 		return ciphertext_bytes, self.random_iv
 
-	def decrypt(self, ciphertext_bytes) -> bool:
+	def decrypt(self, ciphertext_bytes: bytes, selected_iv: bytes) -> Union[bytes, bool]:
 		"""
 		TODO: Javadoc
 		"""
 		plaintext_bytes = decryptAES_CBCMode(
-			ciphertext_bytes, self.random_iv, self.random_key
+			ciphertext_bytes, selected_iv, self.random_key
 		)
 
 		# Validate padding is correct
 		num_padding = plaintext_bytes[-1]
 		if plaintext_bytes[-1 * (num_padding) :] != num_padding * bytes([num_padding]):
-			return False
+			return plaintext_bytes, False
 		else:
-			return True
+			return plaintext_bytes, True
+
+def executePaddingOracleAttack(padding_oracle: CBCPaddingOracle) -> bytes:
+	# TODO: Mark the return type hints
+	# Generate the ciphertext
+	ciphertext_bytes, _ = padding_oracle.encrypt_random_str()
+	print(ciphertext_bytes)
+	print(len(ciphertext_bytes))
+
+	c2 = ciphertext_bytes[:16]
+	random_bytes = secrets.token_bytes(15)
+
+	for key in range(0, 256):
+		c1 = random_bytes +  bytes([key])
+		plaintext_bytes, valid = padding_oracle.decrypt(c2, c1)
+		print(plaintext_bytes)
+		if valid:
+			print("SUCCESS")
+			print(key)
+			break
+		print(c1)
+		print("---")
+
+	return "a"
